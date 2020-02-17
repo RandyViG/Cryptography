@@ -17,6 +17,13 @@ int main(){
     int *key = NULL, *messageIndex = NULL, *encryptMessageVig = NULL, keyAffine[3],a,n,res;
 
     do{
+        nameFile="";
+        message="";
+        alphabet="";
+        encryptVig="";
+        keyVigenere="";
+        messageIndex=NULL;
+        encryptMessageVig=NULL;
         cout << "Clasical Cryptography" << endl;
         cout << "Choose one option: " << endl;
         cout << "1. Encrypt using Vigenere" << endl;
@@ -25,7 +32,7 @@ int main(){
         cout << "4. Calculate a^-1 mod N" << endl;
         cout << "5. Encrypt using Affine" << endl;
         cout << "6. Decrypt using Affine" << endl;
-        cout << "8. Salir" << endl;
+        cout << "7. Exit" << endl; 
         cin >> option;
 
         switch ( option ) {
@@ -82,6 +89,7 @@ int main(){
             break;
 
         case 4: 
+
             cout << "a^-1 mod n " << endl;
             cout << "Enter a: ";
             cin >> a;
@@ -89,6 +97,7 @@ int main(){
             cout << "Enter n: ";
             cin >> n;
             res = modInverse(a,n);
+
             break;
         case 5:
 
@@ -109,7 +118,7 @@ int main(){
             for (int i=0 ; i < message.length();i++)
                 cout << encryptMessageVig[i] << " ";
             cout << endl;
-            encryptVig = matchIndexToCharAffine(encryptMessageVig,alphabet);
+            encryptVig = matchIndexToCharAffine(encryptMessageVig,alphabet,message.size());
             cout << "Recuperando" << endl;
             cout << encryptVig;
             writeF(encryptVig,fileOut);
@@ -124,19 +133,20 @@ int main(){
             cin >> nameFile;
             alphabet = readFile(nameFile);
             alphabet = cleanString(alphabet);
-            cout << "Enter the key for decrypt the message: (a +b)" << endl;
+            cout << "Enter the key for decrypt the message: a(ci+b)" << endl;
             cout << "Enter a: ";
             cin >> keyAffine[0];
             cout << "Enter b: ";
             cin >> keyAffine[1];
             encryptMessageVig = matchCharToIndexAffine(encryptVig,alphabet);
             messageIndex = decryptAffine( encryptVig,encryptMessageVig,keyAffine,alphabet );
-            for (int i=0 ; i < message.length();i++)
+            for (int i=0 ; i < encryptVig.length();i++)
                 cout << messageIndex[i] << " ";
-            message = matchIndexToCharAffine(messageIndex,alphabet);
+            message = matchIndexToCharAffine(messageIndex,alphabet,encryptVig.size());
             cout << endl << "Todo ok: " << message << endl;
             writeF(message,fileOut);
             break;
+
         case 7:
             option = 7;
             break;
