@@ -1,0 +1,13 @@
+
+Llaves Affine
+Text1
+    k(a,b) a: 23 b: 21
+Text2
+    k(a,b) a: 23 b: 16
+    
+Llaves Vigenere
+
+Text 5 y 6
+    rnadscnbnp
+Text 7 y 8
+    zdaxlxhadshrd
