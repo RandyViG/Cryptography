@@ -8,7 +8,7 @@ using namespace std;
 int validateKey(int *key){
     int greatestCommon;
     greatestCommon = gcd(key[0],key[2]);
-    if ( greatestCommon == 1 && 0< key[1] < key[2] )
+    if ( greatestCommon == 1 && 0 < key[1] < key[2] )
         return 1;
     else
         return 0;
@@ -90,17 +90,9 @@ int * encryptAffine(int *message, int *key){
 int * decryptAffine(string msm ,int * message, int * key,string alphabet){
     int * originalMessage = memoryAllocationAffine(msm.length());
     int inv = modInverse(key[0],alphabet.length());
-    cout << "Inverso de a :  " << inv << endl;
     int modb = alphabet.size() - ( key[1] %alphabet.size() );
-    for (int i=0; i< msm.size() ; i++){
-        //modb = (inv * (message[i] - key[1])) % alphabet.length();
-        //originalMessage[i] = ( modb < 0) ? modInverse(modb,alphabet.length()) : modb;
+    for (int i=0; i< msm.size() ; i++)
         originalMessage[i] = inv * (message[i]+modb)%alphabet.size();
-        //originalMessage[i] = key[0]*(message[i]+key[1])%alphabet.size();
-    }
-
-    for (int i=0; i< msm.size();i++)
-        cout << "Original: " << originalMessage[i] << " ";
     return originalMessage;
 }
 
@@ -113,11 +105,7 @@ int * matchCharToIndexAffine(string s,string alphabet){
 
 string matchIndexToCharAffine(int *encryptMessage, string alphabet,int len){
     string auxEncryptMessages;
-    cout << "Entrando: ";
     int position;
-    for (int i =0; i < len ; i++)
-        cout << encryptMessage[i] << " ";
-
     for ( int i = 0; i < len ; i++ ){
         position = encryptMessage[i];
         auxEncryptMessages += alphabet[position];

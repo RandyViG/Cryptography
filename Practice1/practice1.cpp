@@ -12,146 +12,149 @@ string cleanString(string);
 void writeF(string,string);
 
 int main(){
-    string nameFile, message,alphabet, encryptVig,keyVigString,fileOut;
+    string nameFile, message,alphabet, encryptString,keyVigString,fileOut;
     short int option;
-    int *key = NULL, *messageIndex = NULL, *encryptMessageVig = NULL, keyAffine[3],a,n,res;
+    char next;
+    int *key = NULL, *messageIndex = NULL, *encryptMessage = NULL, keyAffine[3],a,n,res;
 
     do{
         nameFile="";
         message="";
         alphabet="";
-        encryptVig="";
+        encryptString="";
         keyVigenere="";
         messageIndex=NULL;
-        encryptMessageVig=NULL;
-        cout << "Clasical Cryptography" << endl;
-        cout << "Choose one option: " << endl;
-        cout << "1. Encrypt using Vigenere" << endl;
-        cout << "2. Decrypt using Vigenere" << endl;
-        cout << "3. Verify Key is valid for affine cipher " << endl;
-        cout << "4. Calculate a^-1 mod N" << endl;
-        cout << "5. Encrypt using Affine" << endl;
-        cout << "6. Decrypt using Affine" << endl;
-        cout << "7. Exit" << endl; 
+        encryptMessage=NULL;
+        system("clear");
+        cout << "\t************************ Clasical Cryptography ************************" << endl;
+        cout << "\t\t 1. Encrypt using Vigenere" << endl;
+        cout << "\t\t 2. Decrypt using Vigenere" << endl;
+        cout << "\t\t 3. Verify Key is valid for affine cipher " << endl;
+        cout << "\t\t 4. Calculate a^-1 mod N" << endl;
+        cout << "\t\t 5. Encrypt using Affine" << endl;
+        cout << "\t\t 6. Decrypt using Affine" << endl;
+        cout << "\t\t 7. Exit" << endl; 
+        cout << "\t\t Choose one option: ";
         cin >> option;
-
+        system("clear");
         switch ( option ) {
         case 1:
 
             fileOut = "encryptText.vig";
-            cout << "Enter the name of the file where is the message:" << endl;
+            cout << "\tEnter the name of the file where is the message:" << endl;
             cin >> nameFile;
             message = readFile(nameFile);
-            cout << "Enter the name of the file where is the alphabet:" << endl ;
+            cout << "\tEnter the name of the file where is the alphabet:" << endl ;
             cin >> nameFile;
             alphabet = readFile(nameFile);
             alphabet = cleanString(alphabet);
             key = generateKey(alphabet,message);
             messageIndex = matchCharToIndex(message,alphabet);
-            encryptMessageVig = encryptVigenere(messageIndex,key);
-            encryptVig = matchIndexToChar(encryptMessageVig,alphabet);
-            writeF(encryptVig,fileOut);
+            encryptMessage = encryptVigenere(messageIndex,key);
+            encryptString = matchIndexToChar(encryptMessage,alphabet);
+            writeF(encryptString,fileOut);
+            cout << "\tPress a key to continue... " << endl;
+            cin >> next;
             break;
 
         case 2:
 
             fileOut = "decryptedText.txt";
-            cout << "Enter the name of the file where is the message:" << endl;
+            cout << "\tEnter the name of the file where is the message:" << endl;
             cin >> nameFile;
-            encryptVig = readFile(nameFile);
-            cout << "Enter the name of the file where is the alphabet:" << endl ;
+            encryptString = readFile(nameFile);
+            cout << "\tEnter the name of the file where is the alphabet:" << endl ;
             cin >> nameFile;
             alphabet = readFile(nameFile);
             alphabet = cleanString(alphabet);
-            cout << "Enter the key for decrypt the message:" << endl;
+            cout << "\tEnter the key for decrypt the message:" << endl;
             cin >> keyVigString;
-            setLength(encryptVig,alphabet,keyVigString);
-            encryptMessageVig = matchCharToIndex(encryptVig,alphabet);
+            setLength(encryptString,alphabet,keyVigString);
+            encryptMessage = matchCharToIndex(encryptString,alphabet);
             key = matchCharToIndex(keyVigString,alphabet);
-            messageIndex = decryptVigenere(encryptMessageVig,key);
+            messageIndex = decryptVigenere(encryptMessage,key);
             message = matchIndexToChar(messageIndex,alphabet);
             writeF(message,fileOut);
+            cout << "\tPress a key to continue... " << endl;
+            cin >> next;
             break;
             
         case 3:
 
-            cout << "key : (a + b)" << endl;
-            cout << "Enter a: ";
+            cout << "\tkey : (a + b)" << endl;
+            cout << "\tEnter a: ";
             cin >> keyAffine[0];
-            cout << "Enter b: ";
+            cout << "\tEnter b: ";
             cin >> keyAffine[1];
-            cout << "Enter the Alphabet's lenght: ";
-            cin >> keyAffine[3];
-            if(validateKey(keyAffine))
-                cout << "Valid key!" << endl;
+            cout << "\tEnter the Alphabet's lenght: ";
+            cin >> keyAffine[2];
+            if(validateKey(keyAffine)==1)
+                cout << "\tValid key!" << endl;
             else
-                cout << "Invalid key!" << endl;
+                cout << "\tInvalid key!" << endl;
+            cout << "Press a key to continue... " << endl;
+            cin >> next;
             break;
 
         case 4: 
 
-            cout << "a^-1 mod n " << endl;
-            cout << "Enter a: ";
+            cout << "\ta^-1 mod n " << endl;
+            cout << "\tEnter a: ";
             cin >> a;
-            cout << "a^-1 mod n " << endl;
-            cout << "Enter n: ";
+            cout << "\ta^-1 mod n " << endl;
+            cout << "\tEnter n: ";
             cin >> n;
             res = modInverse(a,n);
-
+            cout << "\tPress a key to continue... " << endl;
+            cin >> next;
             break;
         case 5:
 
             fileOut = "encryptText.aff";
-            cout << "Enter the name of the file where is the message:" << endl;
+            cout << "\tEnter the name of the file where is the message:" << endl;
             cin >> nameFile;
             message = readFile(nameFile);
             cout << message << endl;
-            cout << "Enter the name of the file where is the alphabet:" << endl ;
+            cout << "\tEnter the name of the file where is the alphabet:" << endl ;
             cin >> nameFile;
             alphabet = readFile(nameFile);
             alphabet = cleanString(alphabet);
             key = generateKeyAffine(alphabet,message);
             messageIndex = matchCharToIndexAffine(message,alphabet);
-            cout << "Indices ok" << endl;
-            encryptMessageVig = encryptAffine(messageIndex,key);
-            cout << "Encryptado " << endl;
-            for (int i=0 ; i < message.length();i++)
-                cout << encryptMessageVig[i] << " ";
-            cout << endl;
-            encryptVig = matchIndexToCharAffine(encryptMessageVig,alphabet,message.size());
-            cout << "Recuperando" << endl;
-            cout << encryptVig;
-            writeF(encryptVig,fileOut);
+            encryptMessage = encryptAffine(messageIndex,key);
+            encryptString = matchIndexToCharAffine(encryptMessage,alphabet,message.size());
+            writeF(encryptString,fileOut);
+            cout << "\tPress a key to continue... " << endl;
+            cin >> next;
             break;
 
         case 6:
             fileOut = "decryptedText.txt";
-            cout << "Enter the name of the file where is the message:" << endl;
+            cout << "\tEnter the name of the file where is the message:" << endl;
             cin >> nameFile;
-            encryptVig = readFile(nameFile);
-            cout << "Enter the name of the file where is the alphabet:" << endl ;
+            encryptString = readFile(nameFile);
+            cout << "\tEnter the name of the file where is the alphabet:" << endl ;
             cin >> nameFile;
             alphabet = readFile(nameFile);
             alphabet = cleanString(alphabet);
-            cout << "Enter the key for decrypt the message: a(ci+b)" << endl;
-            cout << "Enter a: ";
+            cout << "\tEnter the key for decrypt the message: (a+b)" << endl;
+            cout << "\tEnter a: ";
             cin >> keyAffine[0];
-            cout << "Enter b: ";
+            cout << "\tEnter b: ";
             cin >> keyAffine[1];
-            encryptMessageVig = matchCharToIndexAffine(encryptVig,alphabet);
-            messageIndex = decryptAffine( encryptVig,encryptMessageVig,keyAffine,alphabet );
-            for (int i=0 ; i < encryptVig.length();i++)
-                cout << messageIndex[i] << " ";
-            message = matchIndexToCharAffine(messageIndex,alphabet,encryptVig.size());
-            cout << endl << "Todo ok: " << message << endl;
+            encryptMessage = matchCharToIndexAffine(encryptString,alphabet);
+            messageIndex = decryptAffine( encryptString,encryptMessage,keyAffine,alphabet );
+            message = matchIndexToCharAffine(messageIndex,alphabet,encryptString.size());
             writeF(message,fileOut);
+            cout << "Press a key to continue... " << endl;
+            cin >> next;
             break;
 
         case 7:
             option = 7;
             break;
         default:
-            cout << "Invalid option";
+            cout << "\tInvalid option";
             break;
         }
     }while (option != 7);
