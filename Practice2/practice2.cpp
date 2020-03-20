@@ -44,32 +44,39 @@ int main( void ){
                 cout << "\tEnter the the permutation table " << endl;
                 cout << "\tEnter the length of the permutation: ";
                 cin >> len;
+                cout << endl;
                 row1 = (int *)malloc(len*sizeof(int) );
                 row2 = (int *)malloc(len*sizeof(int) );
                 permutation = memoryAllocation(len);
                 inputData(permutation,row1,row2,len);
-                inversePermutation(permutation,len,row2);
-                cout << "\tEnter a key for continue ..." << endl;
+                permutation = inversePermutation(permutation,len,row2);
+                displayTable(permutation,len);
+                cout << "\tEnter a key for continue ";
                 cin >> next;
+                cout << endl;
             break;
         case 2:
                 cout << "\tEnter the length of the permutation: ";
                 cin >> len;
                 permutation = memoryAllocation(len);
                 permutation = generatePermutation(len);
-                cout << "\tEnter a key for continue ..." << endl;
+                cout << "\tEnter a key for continue ";
                 cin >> next;
+                cout << endl;
             break;
         case 3:
-                cout << "\tEnter the name of the file where is the message:" << endl;
+                cout << "\tEnter the name of the file where is the message: " ;
                 cin >> nameFile;
+                cout << endl;
                 message = readFile(nameFile);
                 message = cleanString(message);
-                cout << "\tDo you want to choose the permutation (S/n)?: " << endl;
+                cout << "\tDo you want to choose the permutation (S/n)?: ";
                 cin >> key;
+                cout << endl;
                 if (key == 'S' || key=='s'){
-                    cout << "\tEnter the name of the file where is the table:" << endl;
+                    cout << "\tEnter the name of the file where is the table: ";
                     cin >> nameFile;
+                    cout << endl;
                     row2 = readNumbers(nameFile);
                     permutation = memoryAllocation(tam);
                     for (int i=0; i < tam; i++){
@@ -85,27 +92,30 @@ int main( void ){
                     encryptMessage = encrypt(permutation,message,len);
                 }
                 writeF(encryptMessage,"encrypt.txt");
-                cout << "\tEnter a key for continue ..." << endl;
+                cout << "\tEnter a key for continue ";
                 cin >> next;
+                cout << endl;
             break;
         case 4:
-                cout << "\tEnter the name of the file where is the message:" << endl;
+                cout << "\tEnter the name of the file where is the message: ";
                 cin >> nameFile;
+                cout << endl;
                 message = readFile(nameFile);
                 message = cleanString(message);
-                cout << "\tEnter the name of the file where is the table:" << endl;
+                cout << "\tEnter the name of the file where is the table: ";
                 cin >> nameFile;
+                cout << endl;
                 row2 = readNumbers(nameFile);
                 permutation = memoryAllocation(tam);
-                for (int i=0; i < tam; i++){
-                    permutation[i].origin = i+1;
-                    permutation[i].target = row2[i];
-                }
+                row1 = (int *)malloc( tam*sizeof(int) );
+                saveTable(permutation,row1,row2,tam);
+                permutation = inversePermutation(permutation,tam,row2);
                 displayTable(permutation,tam);
                 decryptMessage =  decrypt(permutation,message,tam);
                 writeF(decryptMessage,"decrypt.txt");
-                cout << "\tEnter a key for continue ..." << endl;
+                cout << "\tEnter a key for continue ";
                 cin >> next;
+                cout << endl;
             break;
         case 5:  
                 option = 5;
@@ -120,8 +130,8 @@ int main( void ){
 
 void menu( void ){
         cout << "\t********************** Permutation *********************" << endl;
-        cout << "\t\t1. Enter a permutation table" << endl;
-        cout << "\t\t2. Generate a permutation table" << endl;
+        cout << "\t\t1. Inverse Permutation table" << endl;
+        cout << "\t\t2. Generate a Permutation table" << endl;
         cout << "\t\t3. Encript using permutation" << endl;
         cout << "\t\t4. Decript using permutation" << endl;
         cout << "\t\t5. Exit" << endl;
@@ -129,6 +139,10 @@ void menu( void ){
 }
 
 void saveTable(table *t, int * row1, int * row2, int len){
+        
+    for(int i = 0; i < len ; i++)
+        row1[i] = i+1;
+
     for (int i = 0; i < len ; i++)
         t[i].origin = row1[i]; 
 
@@ -138,14 +152,14 @@ void saveTable(table *t, int * row1, int * row2, int len){
 
 void inputData(table *t, int * row1, int * row2, int len){
     system("clear");
-    for (int i=0; i< len; i++){
-        cout << "\tEnter the element " << i+1 << " of the first row " << endl;
-        cin >> row1[i];
-    }
+    for (int i=0; i < len; i++)
+
+        row1[i] = i + 1; 
     system("clear");
     for (int i=0; i< len; i++){
-    cout << "\tEnter the element " << i+1 << " of the second row " << endl;
-    cin >> row2[i];
+        cout << "\tEnter the element " << i+1 << " of the permutation: ";
+        cin >> row2[i];
+        cout << endl;
     }
     saveTable(t,row1,row2,len);
 }
