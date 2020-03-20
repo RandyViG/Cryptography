@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int inversePermutation( table * t , int len, int *elements){
+table * inversePermutation( table * t , int len, int *elements){
     table * auxT;
     auxT = memoryAllocation(len);
     int auxE[len];
@@ -24,9 +24,9 @@ int inversePermutation( table * t , int len, int *elements){
                 break;
             }
         }
-    displayTable(auxT,len);
+    //displayTable(auxT,len);
     
-    return 0;
+    return auxT;
 }
 
 table * generatePermutation(int len){
@@ -102,7 +102,7 @@ string decrypt(table *t,string message ,int len){
     for(int i=0; i<message.size();i++)
         auxMessaje+=aux[i];
 
-    cout << "Mens: " << auxMessaje << endl;
+    cout << "\n\tMessage: " << auxMessaje << endl;
     return auxMessaje;
 }
 

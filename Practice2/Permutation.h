@@ -10,7 +10,7 @@ typedef struct Table{
     bool check=false;
 } table;
 
-int inversePermutation(table *, int,int*);
+table* inversePermutation(table *, int,int*);
 table* generatePermutation(int);
 void displayTable(table *,int);
 table * memoryAllocation(int);
