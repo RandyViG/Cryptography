@@ -4,7 +4,7 @@
 
 using namespace std;
 
-char encrypt( unsigned short int key , char message ){
+unsigned short int encrypt( unsigned short int key , short int message ){
     unsigned short int subKey1, subKey2,aux,aux1,subKey[2],r1,r2;
     char auxMessage;
     Permutation *ip;
@@ -15,16 +15,16 @@ char encrypt( unsigned short int key , char message ){
     generateIP(ip);
     aux = makePermutation(message,ip,8);
     r1 = round(aux,subKey[0]);
-    r1= ((r1 << 4)&240) | ((r1>>4)&15);
+    //r1= ((r1 << 4)&240) | ((r1>>4)&15);
     r2 = round(r1,subKey[1]);
     generateIPInverse(ip);
     r2 =makePermutation(r2,ip,8);
-    printf("\nCaracter: %d",r2 );
 
     return r2;
 }
 
-char decrypt( unsigned short int key , char message ){
+unsigned short int decrypt( unsigned short int key , short int message ){
+
     unsigned short int subKey1, subKey2,aux,aux1,subKey[2],r1,r2;
     char auxMessage;
     Permutation *ip;
@@ -35,11 +35,10 @@ char decrypt( unsigned short int key , char message ){
     generateIP(ip);
     aux = makePermutation(message,ip,8);
     r1 = round(aux,subKey[1]);
-    r1= ((r1 << 4)&240) | ((r1>>4)&15);
+    //r1= ( (r1 << 4) & 240 ) | ( (r1>>4) & 15 );
     r2 = round(r1,subKey[0]);
     generateIPInverse(ip);
-    r2 =makePermutation(r2,ip,8);
-    printf("\nCaracter: %d",r2 );
+    r2 = makePermutation(r2,ip,8);
 
     return r2;
 }
@@ -48,7 +47,7 @@ void generateSubKeys( unsigned short int key, unsigned short int * subKey1 , uns
     Permutation * p10;
     p10 = memoryAllocation(10);
     generateP10( p10 );
-    displayTable(p10,10);
+    //displayTable(p10,10);
     *subKey1 = generateKey1( key , p10 );
     *subKey2 = generateKey2( key , p10 );
 }
@@ -69,7 +68,7 @@ unsigned short int round( unsigned short int message , unsigned short int subkey
     generateP4( EP );
     s = makePermutation(s,EP,4);
     left = left ^ s;
-    final=(( left << 4 ) | right);
+    final = ( ( left << 4 ) & 240 | right);
 
     return final;
 }

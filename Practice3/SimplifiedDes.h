@@ -11,8 +11,8 @@ typedef struct Permutation{
 
 using namespace std;
 
-char encrypt( unsigned short int , char );
-char decrypt( unsigned short int , char );
+unsigned short int encrypt( unsigned short int , short int );
+unsigned short int decrypt( unsigned short int , short int );
 void generateSubKeys( unsigned short int , unsigned short int * , unsigned short int * );
 unsigned short int round( unsigned short int message , unsigned short int );
 void generateP10( Permutation *);
