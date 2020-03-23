@@ -132,8 +132,8 @@ void menu( void ){
         cout << "\t********************** Permutation *********************" << endl;
         cout << "\t\t1. Inverse Permutation table" << endl;
         cout << "\t\t2. Generate a Permutation table" << endl;
-        cout << "\t\t3. Encript using permutation" << endl;
-        cout << "\t\t4. Decript using permutation" << endl;
+        cout << "\t\t3. Encrypt using permutation" << endl;
+        cout << "\t\t4. Decrypt using permutation" << endl;
         cout << "\t\t5. Exit" << endl;
         cout << "\t\tChoose the option: ";
 }

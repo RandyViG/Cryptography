@@ -111,8 +111,8 @@ int main( void ){
 
 void menu( void ){
     cout << "\t********************** Simplified DES *********************" << endl;
-    cout << "\t\t1. Encript using DES" << endl;
-    cout << "\t\t2. Decript using DES" << endl;
+    cout << "\t\t1. Encrypt using DES" << endl;
+    cout << "\t\t2. Decrypt using DES" << endl;
     cout << "\t\t3. Exit" << endl;
     cout << "\t\tChoose the option: ";
 }
