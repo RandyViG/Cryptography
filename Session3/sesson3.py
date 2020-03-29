@@ -1,3 +1,4 @@
+from prettytable import PrettyTable
 from GF import *
 
 def  menu():
@@ -14,7 +15,12 @@ if __name__ == "__main__":
         option = menu()
         if option == 1:
             n = int( input("\t\tEnter the n for GF in a range of 3 to 8: ") )
-            calculateTable( n )
+            table = calculateTable( n )
+            ptable = PrettyTable()
+            ptable.field_names = table[0]
+            for i in range( 1, len(table) ):
+                ptable.add_row( table[i] )
+            print( ptable )
 
         elif option == 2:
             pass
