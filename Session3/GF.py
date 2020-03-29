@@ -1,17 +1,18 @@
 
 def calculateTable( n ):
-    #polynomialsI = [ [3,1,0],[4,1,0],[5,2,0],[6,1,0],[7,1,0],[8,4,3,1,0] ]
+    title = [ 0 ]
+    table = [ ]
     polynomialsI = [ 11 , 19 , 37 , 67 , 131 , 283 ]
     module = polynomialsI[ n - 3 ]
     valuesArchived = [ ]
+    for t in range( 1 , 2**n):
+        title.append(t)
+    table.append(title)
     for i in range( 1, 2**n ): 
         valuesArchived.append( calculateValues( i , n , module ) )
-    print(  valuesArchived )
-    #for j in range( 1 , ( 2 ** n ) ):
-
-    
-    return
-
+    for j in range( 1 , ( 2**n ) ):
+        table.append( calculateRow( j,  valuesArchived , n ) )
+    return table
 
 def calculateValues( i , n , module ):
     values = [ ]
@@ -24,3 +25,18 @@ def calculateValues( i , n , module ):
         prev = aux
         values.append( aux )
     return values
+
+
+def calculateRow( val , rowValues , n ):
+    row = [ val ]
+    for i in range(1,2**n):
+        decompose = [ ]
+        for j in range(n):
+            aux = rowValues[ val-1 ]
+            if( i & 2**j ):
+                decompose.append( aux[j] )
+        xor = 0
+        for a in range( len(decompose) ):
+            xor = xor ^ decompose[a]
+        row.append(xor)
+    return row
