@@ -1,5 +1,5 @@
 
-def calculateTable( n ):
+def calculateTable( n , r ):
     title = [ 0 ]
     table = [ ]
     polynomialsI = [ 11 , 19 , 37 , 67 , 131 , 283 ]
@@ -12,6 +12,10 @@ def calculateTable( n ):
         valuesArchived.append( calculateValues( i , n , module ) )
     for j in range( 1 , ( 2**n ) ):
         table.append( calculateRow( j,  valuesArchived , n ) )
+    if r == 'h':
+        table = hexadecimal( table )
+    else:
+        table = polynomial( table )
     return table
 
 def calculateValues( i , n , module ):
@@ -40,3 +44,16 @@ def calculateRow( val , rowValues , n ):
             xor = xor ^ decompose[a]
         row.append(xor)
     return row
+
+def hexadecimal( table ):
+    tableHexa = [ ]
+    for t in table:
+        row = [ ]
+        for r in t:
+            row.append( hex( r ) )
+        tableHexa.append( row )
+    return tableHexa
+
+def polynomial( table ):
+
+    return

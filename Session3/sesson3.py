@@ -15,13 +15,17 @@ if __name__ == "__main__":
         option = menu()
         if option == 1:
             n = int( input("\t\tEnter the n for GF in a range of 3 to 8: ") )
-            table = calculateTable( n )
-            ptable = PrettyTable()
-            ptable.field_names = table[0]
-            for i in range( 1, len(table) ):
-                ptable.add_row( table[i] )
-            print( ptable )
-
+            r = input("\t\tEnter the representation that you like (h)exa or (p)olynomial: ")
+            if ( r == 'h' or r == 'p' ):
+                table = calculateTable( n , r )
+                ptable = PrettyTable()
+                ptable.field_names = table[0]
+                for i in range( 1, len(table) ):
+                    ptable.add_row( table[i] )
+                print( ptable )
+            else:
+                print('\t\tInvalid Representation')
+                continue
         elif option == 2:
             pass
         elif option == 3:
