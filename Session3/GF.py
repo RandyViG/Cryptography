@@ -12,10 +12,12 @@ def calculateTable( n , r ):
         valuesArchived.append( calculateValues( i , n , module ) )
     for j in range( 1 , ( 2**n ) ):
         table.append( calculateRow( j,  valuesArchived , n ) )
+    
     if r == 'h':
         table = hexadecimal( table )
     else:
         table = polynomial( table )
+    
     return table
 
 def calculateValues( i , n , module ):
@@ -55,5 +57,22 @@ def hexadecimal( table ):
     return tableHexa
 
 def polynomial( table ):
+    tablePol = [ ]
+    for t in table:
+        row = [ ]
+        for r in t:
+            row.append( convert( r ) )
+        tablePol.append( row )
+    return tablePol
 
-    return
+def convert( pol ):
+    polynom = ''
+    for i in range(7):
+        if ( pol & 2**i ):
+            if ( i == 0 ):
+                cad = '1'
+            else:
+                cad = 'X^'+str(2**i)
+            
+            polynom =  cad + '+' + polynom  
+    return polynom[:-1]
