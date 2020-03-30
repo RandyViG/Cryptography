@@ -16,8 +16,7 @@ def calculateTable( n , r ):
     if r == 'h':
         table = hexadecimal( table )
     else:
-        table = polynomial( table )
-    
+        table = polynomial( table )  
     return table
 
 def calculateValues( i , n , module ):
@@ -71,8 +70,9 @@ def convert( pol ):
         if ( pol & 2**i ):
             if ( i == 0 ):
                 cad = '1'
+            elif ( i == 1 ):
+                cad = 'X'
             else:
-                cad = 'X^'+str(2**i)
-            
+                cad = 'X^'+str( i )           
             polynom =  cad + '+' + polynom  
     return polynom[:-1]

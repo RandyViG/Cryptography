@@ -22,7 +22,10 @@ if __name__ == "__main__":
                 ptable.field_names = table[0]
                 for i in range( 1, len(table) ):
                     ptable.add_row( table[i] )
-                print( ptable )
+                fileName = 'GF_2^'+str(n)+'.txt'
+                with open(fileName , 'w') as w:
+                    w.write(str(ptable))
+                print( 'Generated Table in the file: {}'.format(fileName) )
             else:
                 print('\t\tInvalid Representation')
                 continue
