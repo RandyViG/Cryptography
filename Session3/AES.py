@@ -6,14 +6,14 @@ def readFile( fileName ):
     newKey = [ int(k,16) for k in key  ]
     return newKey
 
-def keySchedule128( key ):
+def keySchedule( key , rounds ):
     table = [ ]
     keys = [ ]  
     for i in range(0,len(key),4):
         aux = [ key[i] , key[i+1] , key[i+2] , key[i+3] ]
         table.append(aux)
     keys.append(table)
-    for i in range(10):
+    for i in range(rounds):
         keys.append( generateKey( i+1 , keys[i] ) )
     return keys
 
