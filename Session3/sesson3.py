@@ -1,5 +1,6 @@
 from prettytable import PrettyTable
 from GF import *
+from AES import *
 
 def  menu():
     print('\t\t************* Finete Fields *************')
@@ -25,12 +26,16 @@ if __name__ == "__main__":
                 fileName = 'GF_2^'+str(n)+'.txt'
                 with open(fileName , 'w') as w:
                     w.write(str(ptable))
-                print( 'Generated Table in the file: {}'.format(fileName) )
+                    w.close()
+                print( '\t\tGenerated Table in the file: {}'.format(fileName) )
             else:
                 print('\t\tInvalid Representation')
                 continue
         elif option == 2:
-            pass
+            fileName = input('\t\tEnter the name of the file where is the key of 128: ')
+            key = readFile( fileName )
+            keys = keySchedule128( key )
+            saveKeys( keys[1:] )
         elif option == 3:
             pass
         else:
