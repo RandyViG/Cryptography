@@ -1,4 +1,3 @@
-from prettytable import PrettyTable
 from GF import *
 from AES import *
 
@@ -19,15 +18,8 @@ if __name__ == "__main__":
             r = input("\t\tEnter the representation that you like (h)exa or (p)olynomial: ")
             if ( r == 'h' or r == 'p' ):
                 table = calculateTable( n , r )
-                ptable = PrettyTable()
-                ptable.field_names = table[0]
-                for i in range( 1, len(table) ):
-                    ptable.add_row( table[i] )
                 fileName = 'GF_2^'+str(n)+'.txt'
-                with open(fileName , 'w') as w:
-                    w.write(str(ptable))
-                    w.close()
-                print( '\t\tGenerated Table in the file: {}'.format(fileName) )
+                saveTable( fileName , table )
             else:
                 print('\t\tInvalid Representation')
                 continue
@@ -35,7 +27,8 @@ if __name__ == "__main__":
             fileName = input('\t\tEnter the name of the file where is the key of 128: ')
             key = readFile( fileName )
             keys = keySchedule128( key )
-            saveKeys( keys[1:] )
+            fileName = 'KeysAES128.txt'
+            saveKeys( fileName ,  keys[1:] )
         elif option == 3:
             pass
         else:

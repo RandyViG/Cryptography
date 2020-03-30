@@ -1,3 +1,4 @@
+from prettytable import PrettyTable
 
 def calculateTable( n , r ):
     title = [ 0 ]
@@ -76,3 +77,17 @@ def convert( pol ):
                 cad = 'X^'+str( i )           
             polynom =  cad + '+' + polynom  
     return polynom[:-1]
+
+def saveTable( fileName , table ):
+    ptable = PrettyTable()
+    ptable.field_names = table[0]
+    for i in range( 1, len(table) ):
+        ptable.add_row( table[i] )
+    
+    with open(fileName , 'w') as w:
+        w.write(str(ptable))
+        w.close()
+    print( '''
+    \t\t********************************************
+    \t\tGenerated Table in the file: {}
+    \t\t********************************************\n'''.format(fileName) )

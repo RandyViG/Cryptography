@@ -57,8 +57,8 @@ def generateKey( ci , table ):
         key.append(aux)
     return key[:4]
 
-def saveKeys( keys ):
-    with open('KeysAES128.txt' , 'w') as w:
+def saveKeys( fileName , keys ):
+    with open( fileName , 'w') as w:
         for i,key in enumerate(keys):
             w.write('key ' + str(i+1) + ':\n')
             aux = ''
@@ -71,6 +71,10 @@ def saveKeys( keys ):
                 '''
             w.write(aux+'\n')
         w.close()
+    print( '''
+    \t\t*********************************************
+    \t\tKeys generate in the file: {}
+    \t\t*********************************************\n'''.format(fileName) )
     
 
 
