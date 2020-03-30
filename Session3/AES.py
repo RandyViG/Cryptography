@@ -13,8 +13,10 @@ def keySchedule( key , rounds ):
         aux = [ key[i] , key[i+1] , key[i+2] , key[i+3] ]
         table.append(aux)
     keys.append(table)
+    aux = keys[0]
     for i in range(rounds):
-        keys.append( generateKey( i+1 , keys[i] ) )
+        k , aux = generateKey( i+1 , aux )
+        keys.append( k )
     return keys
 
 def generateKey( ci , table ):
@@ -55,7 +57,7 @@ def generateKey( ci , table ):
             newColumn.append( element ^ aux[i] )
         aux = newColumn
         key.append(aux)
-    return key[:4]
+    return key[:4] , key
 
 def saveKeys( fileName , keys ):
     with open( fileName , 'w') as w:
@@ -65,10 +67,6 @@ def saveKeys( fileName , keys ):
             for k in key:
                 for e in k:
                     aux = aux + hex(e)[2:] + ' ' 
-                '''
-                for j in range( 0, len(k),2 ):
-                    aux = aux + hex(k[j])[2:] + hex(k[j+1])[2:] + ' '
-                '''
             w.write(aux+'\n')
         w.close()
     print( '''
