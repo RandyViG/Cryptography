@@ -15,7 +15,7 @@ def keySchedule( key , rounds ):
     keys.append(table)
     aux = keys[0]
     for i in range(rounds):
-        k , aux = generateKey( i+1 , aux )
+        k  = generateKey( i+1 , keys[i] )
         keys.append( k )
     return keys
 
@@ -57,7 +57,19 @@ def generateKey( ci , table ):
             newColumn.append( element ^ aux[i] )
         aux = newColumn
         key.append(aux)
-    return key[:4] , key
+    return key
+
+def orderKeys( keys ):
+    order = [ ]
+    newKeys = [ ]
+    for key in keys:
+        for k in key:
+            order.append(k)
+            
+    for i in range(0,len(order),4):
+        key = [ order[i] , order[i+1] , order[i+2] , order[i+3] ]
+        newKeys.append(key)
+    return newKeys
 
 def saveKeys( fileName , keys ):
     with open( fileName , 'w') as w:

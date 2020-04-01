@@ -32,9 +32,10 @@ if __name__ == "__main__":
         elif option == 3:
             fileName = input('\t\tEnter the name of the file where is the key of 192: ')
             key = readFile( fileName )
-            keys = keySchedule( key , 12 )
+            keys = keySchedule( key , 8 )
+            keys = orderKeys( keys[1:] )
             fileName = 'KeysAES192.txt'
-            saveKeys( fileName ,  keys[1:] )
+            saveKeys( fileName ,  keys )
         else:
             break
     
