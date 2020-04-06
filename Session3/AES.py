@@ -74,7 +74,11 @@ def orderKeys( keys ):
 def saveKeys( fileName , keys ):
     with open( fileName , 'w') as w:
         for i,key in enumerate(keys):
-            w.write('key ' + str(i+1) + ':\n')
+            w.write('key ' + str(i) + ': ')
+            if i == 0:
+                w.write('Pre-whitening\n')
+            else:
+                w.write('\n')
             aux = ''
             for k in key:
                 for e in k:
