@@ -66,7 +66,7 @@ def orderKeys( keys ):
         for k in key:
             order.append(k)
 
-    for i in range(0,len(order),4):
+    for i in range(0,len(order)-2,4):
         key = [ order[i] , order[i+1] , order[i+2] , order[i+3] ]
         newKeys.append(key)
     return newKeys
