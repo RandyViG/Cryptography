@@ -3,41 +3,41 @@
 
 typedef union{
     struct{
-        char p1: 1;
-        char p2: 1;
-        char p3: 1;
-        char p4: 1;
-        char p5: 1;
-        char p6: 1;
-        char p7: 1;
-        char p8: 1;
+        unsigned char p1: 1;
+        unsigned char p2: 1;
+        unsigned char p3: 1;
+        unsigned char p4: 1;
+        unsigned char p5: 1;
+        unsigned char p6: 1;
+        unsigned char p7: 1;
+        unsigned char p8: 1;
     };
-    char word;
+    unsigned char word;
 } Permutation8;
 
 typedef union{
     struct{
-        short int p1: 1;
-        short int p2: 1;
-        short int p3: 1;
-        short int p4: 1;
-        short int p5: 1;
-        short int p6: 1;
-        short int p7: 1;
-        short int p8: 1;
-        short int p9: 1;
-        short int p10: 1;
-        short int pF: 6;
+        unsigned short int p1: 1;
+        unsigned short int p2: 1;
+        unsigned short int p3: 1;
+        unsigned short int p4: 1;
+        unsigned short int p5: 1;
+        unsigned short int p6: 1;
+        unsigned short int p7: 1;
+        unsigned short int p8: 1;
+        unsigned short int p9: 1;
+        unsigned short int p10: 1;
+        unsigned short int pF: 6;
     };
-    short int word;
+    unsigned short int word;
 } Permutation10;
 
 char encrypt( char text , unsigned short int key );
 char decrypt();
-void generateSubkeys( short int key, short int* subkey1, short int* subkey2 );
-short int p10( short int key ); 
-short int subKey1( short int left, short int rigth );
-short int subKey2( short int left, short int rigth );
-short int p8( short int key );
+void generateSubkeys( unsigned short int key, unsigned char* subkey1, unsigned char* subkey2 );
+short int p10( unsigned short int key ); 
+unsigned char subKey1( unsigned short int left, unsigned short int rigth );
+unsigned char subKey2( unsigned short int left, unsigned short int rigth );
+short int p8( unsigned short int key );
 
 #endif

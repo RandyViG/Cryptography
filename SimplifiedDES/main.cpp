@@ -14,10 +14,10 @@ void writeFile( string encryptMessage , string fileName );
 int main( void ){
     short int k;
     char a;
-    cin >> k;
-    cout << "K: " << k << endl;
-    a = encrypt( 'a' , k );
-    cout << "key: " << a << endl;
+    //cin >> k;
+    //cout << "K: " << k << endl;
+    a = encrypt( 'a' , 642 );
+    //cout << "key: " << a << endl;
     return 0;
 }
 
