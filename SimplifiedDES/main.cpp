@@ -16,7 +16,7 @@ int main( void ){
     char a;
     //cin >> k;
     //cout << "K: " << k << endl;
-    a = encrypt( 'a' , 642 );
+    a = encrypt( 189 , 642 );
     //cout << "key: " << a << endl;
     return 0;
 }

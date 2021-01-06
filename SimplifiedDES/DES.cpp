@@ -4,8 +4,10 @@
 using namespace std;
 
 char encrypt( char text , unsigned short int key ){
-    unsigned char subkey1, subkey2;
+    unsigned char value,subkey1, subkey2;
+    value = text;
     generateSubkeys( key , &subkey1, &subkey2 );
+    ip( &value );
     
 }
 
@@ -89,4 +91,24 @@ short int p8( unsigned short int key ){
     aux.p8 = auxKey.p5;
 
     return aux.word;
+}
+
+void ip( unsigned char *text){
+    /**
+     *  _______________________________
+     * | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | Original
+     * | 7 | 3 | 6 | 8 | 5 | 1 | 4 | 2 | Permutación
+     * 
+    */
+    Permutation8 aux, final;
+    aux.word = *text;
+    final.p1 = aux.p2;
+    final.p2 = aux.p4;
+    final.p3 = aux.p1;
+    final.p4 = aux.p5;
+    final.p5 = aux.p8;
+    final.p6 = aux.p6;
+    final.p7 = aux.p3;
+    final.p8 = aux.p7;
+    *text = final.word;
 }

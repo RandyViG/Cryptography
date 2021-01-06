@@ -39,5 +39,6 @@ short int p10( unsigned short int key );
 unsigned char subKey1( unsigned short int left, unsigned short int rigth );
 unsigned char subKey2( unsigned short int left, unsigned short int rigth );
 short int p8( unsigned short int key );
+void ip( unsigned char* text);
 
 #endif
